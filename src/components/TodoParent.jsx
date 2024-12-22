@@ -6,13 +6,10 @@ import "../css/TodoParent.css";
 function TodoParent() {
     const [tasks, setTasks] = useState([]);
     const taskRefs = useRef([]);
-    
 
     const handleNewTask = () => {
         setTasks([...tasks, ""]);
 
-        // tasks && taskRefs.current.map(item => item.contentEditable = false)
-        
         setTimeout(() => {
             const lastIndex = tasks.length;
             taskRefs.current[lastIndex].contentEditable = true;
@@ -20,10 +17,29 @@ function TodoParent() {
         }, 0);
     };
 
+    const handleEdit = (index) => {
+        if (taskRefs.current[index]) {
+            taskRefs.current[index].contentEditable = true;
+            taskRefs.current[index].focus();
+        }
+    };
 
+    const handleSave = (index, newText) => {
+        const newTasks = [...tasks];
+        newTasks[index] = newText;
+        setTasks(newTasks);
+        if (taskRefs.current[index]) {
+            taskRefs.current[index].contentEditable = false;
+        }
+    };
+
+    const handleDelete = (index) => {
+        setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+    };
+    console.log(tasks)
     return (
         <div>
-            <h2>My Todo App</h2>
+            <h2>My Todo</h2>
             <div id="taskContainer">
                 {tasks.length > 0
                     ? tasks.map((item, index) => (
@@ -32,8 +48,9 @@ function TodoParent() {
                             key={index}
                             index={index}
                             ref={el => taskRefs.current[index] = el}
-                            setTasks={setTasks}
-                            taskRefs={taskRefs}
+                            handleEdit={handleEdit}
+                            handleSave={handleSave}
+                            handleDelete={handleDelete}
                         />
                     ))
                     : "You have no task currently, please add some."}
