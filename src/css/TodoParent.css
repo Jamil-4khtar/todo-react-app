@@ -1,0 +1,75 @@
+#createTask {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    height: 50px;
+    width: 50px;
+    font-size: 28px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+    z-index: 10;
+}
+
+#createTask:active {
+    animation: clickAnimation 0.3s ease-in-out;
+}
+
+@keyframes clickAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.task {
+    /* background-color: #f9f9f9; */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+}
+.task:focus-within {
+    /* background-color: #e0f7fa; */
+    border: 1px solid #00796b;
+    outline: none;
+}
+
+.task p {
+    width: 100%;
+    margin: -5px;
+    font-size: 16px;
+    outline: none;
+    overflow-x: hidden;
+    max-height: 200px;
+    text-overflow: clip;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+
+
+.task>div {
+    /* width: 100px; */
+    margin: 0;
+    /* background: red; */
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 5px;
+}
